@@ -10,7 +10,7 @@ from urllib import parse
 
 
 def load_resolver():
-    path = Path(__file__).resolve().parents[1] / 'plugin.video.dailymotion_com/resources/lib/dailymotion.py'
+    path = Path(__file__).resolve().parents[1] / 'plugin.video.dailymotion_unofficial/resources/lib/dailymotion.py'
     tree = ast.parse(path.read_text(encoding='utf-8'))
     functions = [node for node in tree.body if isinstance(node, ast.FunctionDef)
                  and node.name in ('s', '_hls_variant', 'getStreamUrl')]

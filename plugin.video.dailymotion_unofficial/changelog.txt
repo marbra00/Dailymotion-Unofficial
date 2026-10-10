@@ -1,3 +1,11 @@
+1.0.0 - 10 Oct 2026
+ - Fix Dailymotion video playback.
+ - Improve selection of available video quality.
+ - Default to the highest available video quality (up to 2160p).
+ - Handle unavailable streams without crashing.
+
+Original addon history:
+
 2.4.5 - 04 Jul 2026
  - remove old requests module and use native urllib
  - Fix playback issues
