@@ -44,6 +44,9 @@ def request(url, headers=None, post=None, cookie=None, timeout='20', return_url=
                            'DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:'
                            'DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256')
     ssl_context.set_alpn_protocols(['http/1.1'])
+    # Modified 2026-10-11: avoid CDN HTTP 403 with Android's Python/OpenSSL build.
+    if xbmc.getCondVisibility('System.Platform.Android'):
+        ssl_context.options |= ssl.OP_NO_TICKET
     handlers += [urllib_request.HTTPSHandler(context=ssl_context)]
     opener = urllib_request.build_opener(*handlers)
     opener = urllib_request.install_opener(opener)

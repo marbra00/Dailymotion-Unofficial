@@ -1,6 +1,7 @@
 # Dailymotion – Unofficial
 
-**Version:** 1.0.0  
+**Version:** 1.0.1
+
 **Addon-ID:** `plugin.video.dailymotion_unofficial`
 
 ## Deutsch
@@ -9,7 +10,7 @@ Inoffizieller Fork des Dailymotion-Addons von gujal, der unabhängig weitergepfl
 
 ### Installation
 
-1. Lade die Installationsdatei `plugin.video.dailymotion_unofficial-1.0.0.zip` herunter, sobald sie unter [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases) veröffentlicht ist. Die GitHub-Funktion „Download ZIP“ liefert das gesamte Quellcode-Repository und nicht das installierbare Addon.
+1. Lade die Installationsdatei `plugin.video.dailymotion_unofficial-1.0.1.zip` herunter, sobald sie unter [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases) veröffentlicht ist. Die GitHub-Funktion „Download ZIP“ liefert das gesamte Quellcode-Repository und nicht das installierbare Addon.
 2. Öffne in Kodi **Add-ons → Paket-Symbol → Aus ZIP-Datei installieren** und wähle die Datei aus. Falls Kodi die Installation blockiert, kann sie unter **Einstellungen → System → Add-ons → Unbekannte Quellen** freigegeben werden.
 3. Starte **Dailymotion – Unofficial** unter den Video-Addons.
 
@@ -41,10 +42,6 @@ plugin://plugin.video.dailymotion_unofficial/?url=VIDEOID&mode=playLiveVideo
 
 Bestehende Links mit `plugin.video.dailymotion_com` starten weiterhin das Originaladdon. Die Livestream-Funktion wurde übernommen; sie wurde bei der Wiedergabereparatur nicht separat getestet.
 
-### Teststand
-
-Die Wiedergabereparatur wurde mit Kodi **21.3 unter Windows** getestet, einschließlich eines Videos mit 1080p. Acht Offline-Regressionstests prüfen die Stream-Auswahl und Fehlerbehandlung. Andere Geräte und Kodi-Versionen wurden nicht getestet.
-
 ### Herkunft und Lizenz
 
 Originalprojekt: [Gujal00/Kodi-Official](https://github.com/Gujal00/Kodi-Official), bisherige Addon-ID `plugin.video.dailymotion_com`. Die Git-Historie enthält die ursprünglichen Beiträge. Fork-Maintainer: **marbra00**. Die Wiedergabereparatur und die Vorbereitung des Forks entstanden mit KI-Unterstützung.
@@ -57,7 +54,7 @@ An unofficial fork of gujal's Dailymotion addon, maintained independently. This 
 
 ### Installation
 
-1. Download `plugin.video.dailymotion_unofficial-1.0.0.zip` once it is published on [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases). GitHub's “Download ZIP” provides the complete source repository rather than an installable addon package.
+1. Download `plugin.video.dailymotion_unofficial-1.0.1.zip` once it is published on [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases). GitHub's “Download ZIP” provides the complete source repository rather than an installable addon package.
 2. In Kodi, open **Add-ons → package icon → Install from ZIP file** and select the file. If installation is blocked, it can be enabled under **Settings → System → Add-ons → Unknown sources**.
 3. Open **Dailymotion – Unofficial** from the video addons.
 
@@ -88,10 +85,6 @@ plugin://plugin.video.dailymotion_unofficial/?url=VIDEOID&mode=playLiveVideo
 ```
 
 Existing links using `plugin.video.dailymotion_com` still launch the original addon. Livestream support was retained but was not tested separately during the playback repair.
-
-### Validation status
-
-The playback repair was tested on Kodi **21.3 for Windows**, including a video offering 1080p. Eight offline regression tests cover stream selection and error handling. Other devices and Kodi versions have not been tested.
 
 ### Credits and licence
 

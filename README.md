@@ -3,7 +3,7 @@
 An unofficial fork of gujal's Dailymotion addon, maintained independently by marbra00. This addon is not an official product of Dailymotion or Team Kodi.
 
 - Addon ID: `plugin.video.dailymotion_unofficial`
-- Version: `1.0.0`
+- Version: `1.0.1`
 - Licence: GPL-3.0-or-later; [licence text](plugin.video.dailymotion_unofficial/LICENSE)
 - Original project: [Gujal00/Kodi-Official](https://github.com/Gujal00/Kodi-Official)
 - Playback repair tested on Kodi 21.3 for Windows.
