@@ -9,7 +9,7 @@ Inoffizieller Fork des Dailymotion-Addons von gujal, der unabhängig weitergepfl
 
 ### Installation
 
-1. Lade die Installationsdatei `plugin.video.dailymotion_unofficial-1.0.0.zip` herunter, sobald sie unter [GitHub Releases](https://github.com/marbra00/Kodi-Official/releases) veröffentlicht ist. Die GitHub-Funktion „Download ZIP“ liefert das gesamte Quellcode-Repository und nicht das installierbare Addon.
+1. Lade die Installationsdatei `plugin.video.dailymotion_unofficial-1.0.0.zip` herunter, sobald sie unter [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases) veröffentlicht ist. Die GitHub-Funktion „Download ZIP“ liefert das gesamte Quellcode-Repository und nicht das installierbare Addon.
 2. Öffne in Kodi **Add-ons → Paket-Symbol → Aus ZIP-Datei installieren** und wähle die Datei aus. Falls Kodi die Installation blockiert, kann sie unter **Einstellungen → System → Add-ons → Unbekannte Quellen** freigegeben werden.
 3. Starte **Dailymotion – Unofficial** unter den Video-Addons.
 
@@ -49,7 +49,7 @@ Die Wiedergabereparatur wurde mit Kodi **21.3 unter Windows** getestet, einschli
 
 Originalprojekt: [Gujal00/Kodi-Official](https://github.com/Gujal00/Kodi-Official), bisherige Addon-ID `plugin.video.dailymotion_com`. Die Git-Historie enthält die ursprünglichen Beiträge. Fork-Maintainer: **marbra00**. Die Wiedergabereparatur und die Vorbereitung des Forks entstanden mit KI-Unterstützung.
 
-Lizenz: **GPL-3.0-or-later**. Der vollständige GPLv3-Lizenztext liegt in [LICENSE](LICENSE). Die bestehenden Lizenz- und Autorenhinweise bleiben erhalten. Quellcode des Forks: [marbra00/Kodi-Official](https://github.com/marbra00/Kodi-Official).
+Lizenz: **GPL-3.0-or-later**. Der vollständige GPLv3-Lizenztext liegt in [LICENSE](LICENSE). Die bestehenden Lizenz- und Autorenhinweise bleiben erhalten. Quellcode des Forks: [marbra00/Dailymotion-Unofficial](https://github.com/marbra00/Dailymotion-Unofficial).
 
 ## English
 
@@ -57,7 +57,7 @@ An unofficial fork of gujal's Dailymotion addon, maintained independently. This 
 
 ### Installation
 
-1. Download `plugin.video.dailymotion_unofficial-1.0.0.zip` once it is published on [GitHub Releases](https://github.com/marbra00/Kodi-Official/releases). GitHub's “Download ZIP” provides the complete source repository rather than an installable addon package.
+1. Download `plugin.video.dailymotion_unofficial-1.0.0.zip` once it is published on [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases). GitHub's “Download ZIP” provides the complete source repository rather than an installable addon package.
 2. In Kodi, open **Add-ons → package icon → Install from ZIP file** and select the file. If installation is blocked, it can be enabled under **Settings → System → Add-ons → Unknown sources**.
 3. Open **Dailymotion – Unofficial** from the video addons.
 
@@ -97,4 +97,4 @@ The playback repair was tested on Kodi **21.3 for Windows**, including a video o
 
 Original project: [Gujal00/Kodi-Official](https://github.com/Gujal00/Kodi-Official), original addon ID `plugin.video.dailymotion_com`. Git history preserves the original contributions. Fork maintainer: **marbra00**. AI assistance was used for the playback repair and fork preparation.
 
-Licence: **GPL-3.0-or-later**. The complete GPLv3 licence text is included in [LICENSE](LICENSE). Existing licence and author notices are retained. Fork source: [marbra00/Kodi-Official](https://github.com/marbra00/Kodi-Official).
+Licence: **GPL-3.0-or-later**. The complete GPLv3 licence text is included in [LICENSE](LICENSE). Existing licence and author notices are retained. Fork source: [marbra00/Dailymotion-Unofficial](https://github.com/marbra00/Dailymotion-Unofficial).
