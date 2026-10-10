@@ -1,3 +1,4 @@
+# Modified 2026-10-10: Dailymotion TLS compatibility and playback error handling.
 """
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,13 +26,23 @@ TRANSLATEPATH = xbmcvfs.translatePath if six.PY3 else xbmc.translatePath
 CERT_FILE = TRANSLATEPATH('special://xbmc/system/certs/cacert.pem')
 
 
-def request(url, headers=None, post=None, cookie=None, timeout='20'):
+def request(url, headers=None, post=None, cookie=None, timeout='20', return_url=False):
     _headers = {}
     if headers:
         _headers.update(headers)
 
     handlers = []
     ssl_context = ssl.create_default_context(cafile=CERT_FILE)
+    # Align the embedded Python TLS defaults with current Python releases.
+    # Certificate and hostname verification remain enabled.
+    ssl_context.minimum_version = ssl.TLSVersion.TLSv1_2
+    ssl_context.set_ciphers('ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:'
+                           'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:'
+                           'ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:'
+                           'ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:'
+                           'ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:'
+                           'DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:'
+                           'DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256')
     ssl_context.set_alpn_protocols(['http/1.1'])
     handlers += [urllib_request.HTTPSHandler(context=ssl_context)]
     opener = urllib_request.build_opener(*handlers)
@@ -67,9 +78,11 @@ def request(url, headers=None, post=None, cookie=None, timeout='20'):
 
     try:
         response = urllib_request.urlopen(req, timeout=int(timeout))
-    except urllib_error.URLError:
+    except urllib_error.HTTPError as error:
+        xbmc.log('DAILYMOTION - HTTP {0} from {1}'.format(error.code, urllib_parse.urlparse(url).hostname), xbmc.LOGERROR)
         return ''
-    except urllib_error.HTTPError:
+    except urllib_error.URLError:
+        xbmc.log('DAILYMOTION - Network error contacting {0}'.format(urllib_parse.urlparse(url).hostname), xbmc.LOGERROR)
         return ''
 
     result = response.read()
@@ -102,8 +115,9 @@ def request(url, headers=None, post=None, cookie=None, timeout='20'):
     if 'json' in content_type:
         result = json.loads(result if isinstance(result, str) else result.decode('utf-8'))
 
+    final_url = response.geturl()
     response.close()
-    return result
+    return (result, final_url) if return_url else result
 
 
 def _add_request_header(_request, headers):

@@ -1,3 +1,4 @@
+# Modified 2026-10-10: Dailymotion TLS compatibility and playback error handling.
 '''
     Dailymotion_com
 
@@ -74,7 +75,7 @@ itemsPerPage = addon.getSetting("itemsPerPage")
 itemsPage = ["25", "50", "75", "100"]
 itemsPerPage = itemsPage[int(itemsPerPage)]
 urlMain = "https://api.dailymotion.com"
-_UA = 'Mozilla/5.0 (Linux; Android 7.1.1; Pixel Build/NMF26O) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36'
+_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0'
 
 
 def strip_tags(text):
@@ -346,6 +347,7 @@ def playVideo(vid, live=False):
         xbmcplugin.setResolvedUrl(pluginhandle, True, listitem=listitem)
     else:
         xbmcgui.Dialog().notification('Info:', translation(30022), _icon, 5000, False)
+        xbmcplugin.setResolvedUrl(pluginhandle, False, xbmcgui.ListItem())
 
 
 def s(elem):
@@ -355,98 +357,82 @@ def s(elem):
         return int(elem[0].split("@")[0])
 
 
+def _hls_variant(manifest, base_url, limit):
+    """Select a variant without assuming NAME or absolute playlist URIs."""
+    if not isinstance(manifest, six.string_types) or not manifest.lstrip().startswith('#EXTM3U'):
+        return None
+    variants = []
+    pending = None
+    for line in manifest.splitlines():
+        line = line.strip()
+        if line.startswith('#EXT-X-STREAM-INF:'):
+            pending = dict(re.findall(r'([A-Z0-9-]+)=("[^"]*"|[^,]*)', line))
+        elif line and not line.startswith('#') and pending is not None:
+            name = pending.get('NAME', '').strip('"')
+            height = re.match(r'(\d+)', name)
+            if not height:
+                height = re.search(r'x(\d+)', pending.get('RESOLUTION', ''))
+            quality = int(height.group(1)) if height else 0
+            bandwidth = pending.get('BANDWIDTH', '0')
+            bandwidth = int(bandwidth) if bandwidth.isdigit() else 0
+            variants.append((quality, bandwidth, urllib_parse.urljoin(base_url, line).split('#')[0]))
+            pending = None
+    if variants:
+        permitted = [item for item in variants if item[0] <= int(limit)]
+        selected = max(permitted) if permitted else min(variants)
+        return selected[2]
+    if '#EXTINF:' in manifest or '#EXT-X-TARGETDURATION:' in manifest:
+        return base_url.split('#')[0]
+    return None
+
+
 def getStreamUrl(vid, live=False):
-    xbmc.log('DAILYMOTION - url is {0}'.format(url), xbmc.LOGDEBUG)
-    headers = {'User-Agent': _UA,
-               'Origin': 'https://www.dailymotion.com',
-               'Referer': 'https://www.dailymotion.com/'}
-    cookie = {'lang': language,
-              'ff': "on" if familyFilter == "1" else "off"}
-    content = client.request("https://www.dailymotion.com/player/metadata/video/{0}".format(vid), headers=headers, cookie=cookie)
-    if content.get('error'):
-        Error = (content['error']['message'])
-        xbmcgui.Dialog().notification('Info:', Error, _icon, 5000, False)
-        return
-    else:
-        cc = content['qualities']
-        cc = list(cc.items())
-        cc = sorted(cc, key=s, reverse=True)
-        subs = content.get('subtitles', {}).get('data')
-        if subs:
-            subs = [subs[x].get('urls')[0] for x in subs.keys()]
-        m_url = ''
-        other_playable_url = []
-
-        for source, json_source in cc:
-            source = source.split("@")[0]
-            for item in json_source:
-                m_url = item.get('url', None)
-                xbmc.log("DAILYMOTION - m_url = {0}".format(m_url), xbmc.LOGDEBUG)
-                if m_url:
-                    if not live:
-                        if source == "auto":
-                            mbtext = client.request(m_url, headers=headers)
-                            mb = re.findall(r'NAME="(\d+)".*\n([^\n]+)', mbtext)
-                            mb = sorted(mb, key=s, reverse=True)
-                            for quality, strurl in mb:
-                                quality = quality.split("@")[0]
-                                if int(quality) <= int(maxVideoQuality):
-                                    strurl = '{0}|{1}'.format(strurl.split('#cell')[0], urllib_parse.urlencode(headers))
-                                    xbmc.log('Selected URL is: {0}'.format(strurl), xbmc.LOGDEBUG)
-                                    return (strurl, subs) if subs else strurl
-
-                        elif int(source) <= int(maxVideoQuality):
-                            if 'video' in item.get('type', None):
-                                return '{0}|{1}'.format(m_url, urllib_parse.urlencode(headers))
-
-                    else:
-                        m_url = m_url.replace('dvr=true&', '')
-                        if '.m3u8?sec' in m_url:
-                            m_url1 = m_url.split('?sec=')
-                            the_url = '{0}?redirect=0&sec={1}'.format(m_url1[0], urllib_parse.quote(m_url1[1]))
-                            try:
-                                rr = client.request(the_url, headers=headers)
-                            except urllib_error.HTTPError:
-                                rr = client.request(m_url, headers=headers)
-                            mb = re.findall('NAME="([^"]+)"\n(.+)', rr)
-                            mb = sorted(mb, key=s, reverse=True)
-                            for quality, strurl in mb:
-                                quality = quality.split("@")[0]
-                                if int(quality) <= int(maxVideoQuality):
-                                    if not strurl.startswith('http'):
-                                        strurl1 = re.findall('(.+/)', the_url)[0]
-                                        strurl = strurl1 + strurl
-                                    strurl = '{0}|{1}'.format(strurl.split('#cell')[0], urllib_parse.urlencode(headers))
-                                    xbmc.log('Selected URL is: {0}'.format(strurl), xbmc.LOGDEBUG)
-                                    return strurl
-                    if type(m_url) is list:
-                        m_url = '?sec='.join(m_url)
-                    other_playable_url.append(m_url)
-
-        if len(other_playable_url) > 0:  # probably not needed, only for last resort
-            for m_url in other_playable_url:
-                xbmc.log("DAILYMOTION - other m_url = {0}".format(m_url), xbmc.LOGDEBUG)
-                m_url = m_url.replace('dvr=true&', '')
-                if '.m3u8?sec' in m_url:
-                    rr = client.request(m_url, headers=headers)
-                    mburl = re.findall('(http.+)', rr)[0].split('#cell')[0]
-                    xbmc.log("DAILYMOTION - other mburl = {0}".format(mburl), xbmc.LOGDEBUG)
-                    mb = client.request(mburl, headers=headers)
-                    mb = re.findall('NAME="([^"]+)"\n(.+)', mb)
-                    if mb:
-                        mb = sorted(mb, key=s, reverse=True)
-                        for quality, strurl in mb:
-                            quality = quality.split("@")[0]
-                            if int(quality) <= int(maxVideoQuality):
-                                if not strurl.startswith('http'):
-                                    strurl1 = re.findall('(.+/)', mburl)[0]
-                                    strurl = strurl1 + strurl
-                                break
-                    else:
-                        strurl = mburl
-
-                    xbmc.log("DAILYMOTION - Calculated url = {0}".format(strurl), xbmc.LOGDEBUG)
-                    return strurl
+    cookie = {'lang': language, 'ff': "on" if familyFilter == "1" else "off"}
+    # Refresh metadata for each identity: signed URLs may depend on the client.
+    agents = [_UA, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36']
+    for agent in agents:
+        headers = {'User-Agent': agent, 'Origin': 'https://www.dailymotion.com',
+                   'Referer': 'https://www.dailymotion.com/'}
+        content = client.request("https://www.dailymotion.com/player/metadata/video/{0}".format(vid),
+                                 headers=headers, cookie=cookie)
+        if not isinstance(content, dict):
+            continue
+        if content.get('error'):
+            error = content['error']
+            message = error.get('message') or error.get('title') or translation(30022)
+            xbmcgui.Dialog().notification('Dailymotion:', message, _icon, 5000, False)
+            return None
+        qualities = content.get('qualities') or {}
+        if not isinstance(qualities, dict):
+            continue
+        subtitles = (content.get('subtitles') or {}).get('data') or {}
+        subs = [track['urls'][0] for track in subtitles.values()
+                if isinstance(track, dict) and track.get('urls')]
+        for quality, sources in sorted(qualities.items(), key=s, reverse=True):
+            for item in sources:
+                media_url = item.get('url')
+                media_type = item.get('type') or ''
+                if not media_url or not isinstance(media_url, six.string_types):
+                    continue
+                if live:
+                    media_url = media_url.replace('dvr=true&', '')
+                stream_headers = dict(headers)
+                if 'mpegurl' in media_type.lower() or '.m3u8' in media_url:
+                    result = client.request(media_url, headers=stream_headers, return_url=True)
+                    if not result:
+                        continue
+                    manifest, final_url = result
+                    stream = _hls_variant(manifest, final_url, maxVideoQuality)
+                elif media_type.startswith('video/') and quality != 'auto' and int(quality.split('@')[0]) <= int(maxVideoQuality):
+                    stream = media_url
+                else:
+                    continue
+                if stream:
+                    xbmc.log('DAILYMOTION - Resolved video {0}'.format(vid), xbmc.LOGDEBUG)
+                    stream = '{0}|{1}'.format(stream, urllib_parse.urlencode(stream_headers))
+                    return (stream, subs) if subs else stream
+    xbmc.log('DAILYMOTION - No playable playlist for video {0}; see HTTP errors above'.format(vid), xbmc.LOGERROR)
+    return None
 
 
 def queueVideo(url, name):
