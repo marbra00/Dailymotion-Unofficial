@@ -262,7 +262,7 @@ def listVideos(url):
             date = datetime.datetime.fromtimestamp(int(date)).strftime('%Y-%m-%d')
         except:
             date = ""
-        temp = ("User: {0}  |  {1} Views  |  {2}".format(user, views, date))
+        temp = translation(30118).format(user, views, date)
         temp = temp.encode('utf-8') if six.PY2 else temp
         try:
             desc = "{0}\n{1}".format(temp, desc)
@@ -296,7 +296,7 @@ def listUsers(url):
             thumb = item['avatar_large_url']
             videos = item['videos_total']
             views = item['views_total']
-            addUserDir(user, 'owner:{0}'.format(user), 'sortVideos1', thumb.replace("\\", ""), "Views: {0}\nVideos: {1}".format(views, videos))
+            addUserDir(user, 'owner:{0}'.format(user), 'sortVideos1', thumb.replace("\\", ""), translation(30119).format(views, videos))
     if content['has_more']:
         currentPage = content['page']
         nextPage = currentPage + 1
@@ -314,7 +314,7 @@ def listLive(url):
         vid = item['id']
         thumb = item['thumbnail_large_url']
         views = item['views_last_hour']
-        addLiveLink(title, vid, 'playLiveVideo', thumb.replace("\\", ""), 'Views: {}'.format(views))
+        addLiveLink(title, vid, 'playLiveVideo', thumb.replace("\\", ""), translation(30120).format(views))
     if content['has_more']:
         currentPage = content['page']
         nextPage = currentPage + 1
@@ -691,7 +691,7 @@ def History():
 
 
 def delHistory():
-    if xbmcgui.Dialog().yesno("Dailymotion", "Clear all search terms?"):
+    if xbmcgui.Dialog().yesno("Dailymotion", translation(30121)):
         with open(HistoryFile, 'w') as fh:
             fh.write("")
 

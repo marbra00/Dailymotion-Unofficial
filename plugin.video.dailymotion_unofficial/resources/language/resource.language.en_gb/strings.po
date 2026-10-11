@@ -268,3 +268,19 @@ msgstr "Clear search history"
 msgctxt "#30117"
 msgid "New Search term"
 msgstr "New Search term"
+
+msgctxt "#30118"
+msgid "User: {0}  |  {1} Views  |  {2}"
+msgstr "User: {0}  |  {1} Views  |  {2}"
+
+msgctxt "#30119"
+msgid "Views: {0}\nVideos: {1}"
+msgstr "Views: {0}\nVideos: {1}"
+
+msgctxt "#30120"
+msgid "Views: {0}"
+msgstr "Views: {0}"
+
+msgctxt "#30121"
+msgid "Clear all search terms?"
+msgstr "Clear all search terms?"

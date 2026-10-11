@@ -1,6 +1,6 @@
 # XBMC Media Center language file
-# Addon Name: DailyMotion.com
-# Addon id: plugin.video.dailymotion_com
+# Addon Name: Dailymotion – Unofficial
+# Addon id: plugin.video.dailymotion_unofficial
 
 msgid ""
 msgstr ""
@@ -22,7 +22,7 @@ msgstr "Filme, TV, Musik, User-Clips und Live-Streams"
 
 msgctxt "Addon Description"
 msgid "Dailymotion attracts 300 million users from around the world, who watch 3.5 billion videos on its player each month."
-msgstr "Dailymotion zieht 300 Millionen Nutzer aus der ganzen Welt an, die jeden Monat 3,5 Milliarden Videos auf ihrem Player ansehen."
+msgstr "Inoffizieller Fork des Dailymotion-Addons von gujal, der unabhängig weitergepflegt wird."
 
 msgctxt "Addon Disclaimer"
 msgid "Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing."
@@ -34,167 +34,167 @@ msgstr "Nächste Seite"
 
 msgctxt "#30002"
 msgid "Search"
-msgstr ""
+msgstr "Suche"
 
 msgctxt "#30003"
 msgid "Live"
-msgstr ""
+msgstr "Livestreams"
 
 msgctxt "#30004"
 msgid "Movies"
-msgstr ""
+msgstr "Filme"
 
 msgctxt "#30005"
 msgid "Popular"
-msgstr ""
+msgstr "Beliebt"
 
 msgctxt "#30006"
 msgid "Channels"
-msgstr ""
+msgstr "Kanäle"
 
 msgctxt "#30007"
 msgid "Users"
-msgstr ""
+msgstr "Benutzer"
 
 msgctxt "#30008"
 msgid "Most Recent"
-msgstr ""
+msgstr "Neueste Videos"
 
 msgctxt "#30009"
 msgid "Most Viewed"
-msgstr ""
+msgstr "Meistgesehen"
 
 msgctxt "#30010"
 msgid "Hour"
-msgstr ""
+msgstr "Letzte Stunde"
 
 msgctxt "#30011"
 msgid "Today"
-msgstr ""
+msgstr "Heute"
 
 msgctxt "#30012"
 msgid "Week"
-msgstr ""
+msgstr "Diese Woche"
 
 msgctxt "#30013"
 msgid "Month"
-msgstr ""
+msgstr "Dieser Monat"
 
 msgctxt "#30014"
 msgid "All Time"
-msgstr ""
+msgstr "Gesamter Zeitraum"
 
 msgctxt "#30015"
 msgid "Trending"
-msgstr ""
+msgstr "Im Trend"
 
 msgctxt "#30016"
 msgid "Featured"
-msgstr ""
+msgstr "Empfohlen"
 
 msgctxt "#30017"
 msgid "Official"
-msgstr ""
+msgstr "Offiziell"
 
 msgctxt "#30018"
 msgid "Creative"
-msgstr ""
+msgstr "Kreativ"
 
 msgctxt "#30019"
 msgid "Most Popular"
-msgstr ""
+msgstr "Am beliebtesten"
 
 msgctxt "#30020"
 msgid "Most Commented"
-msgstr ""
+msgstr "Meistkommentiert"
 
 msgctxt "#30021"
 msgid "Top Rated"
-msgstr ""
+msgstr "Bestbewertet"
 
 msgctxt "#30022"
 msgid "Video not available"
-msgstr ""
+msgstr "Video nicht verfügbar"
 
 msgctxt "#30023"
 msgid "Added"
-msgstr "Hinzugefuegt"
+msgstr "Hinzugefügt"
 
 msgctxt "#30024"
 msgid "Favourites"
-msgstr ""
+msgstr "Favoriten"
 
 msgctxt "#30025"
 msgid "What to Watch"
-msgstr "Was man sich ansehen sollte"
+msgstr "Entdecken"
 
 msgctxt "#30028"
 msgid "Add user to favourites"
-msgstr "User zu Favoriten hinzufügen"
+msgstr "Benutzer zu den Favoriten hinzufügen"
 
 msgctxt "#30029"
 msgid "Remove from favourites"
-msgstr "Aus Favoriten entfernen"
+msgstr "Aus den Favoriten entfernen"
 
 msgctxt "#30030"
 msgid "Added user to favourites"
-msgstr "User zu Favoriten hinzugefuegt"
+msgstr "Benutzer zu den Favoriten hinzugefügt"
 
 msgctxt "#30031"
 msgid "Are you over 18 and would like to turn off the family filter?"
-msgstr ""
+msgstr "Bist du mindestens 18 Jahre alt und möchtest den Familienfilter deaktivieren?"
 
 msgctxt "#30032"
 msgid "Turn the family filter on?"
-msgstr ""
+msgstr "Familienfilter aktivieren?"
 
 msgctxt "#30033"
 msgid "Add user"
-msgstr "User hinzufügen"
+msgstr "Benutzer hinzufügen"
 
 msgctxt "#30034"
 msgid "My stuff"
-msgstr ""
+msgstr "Mein Bereich"
 
 msgctxt "#30035"
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakte"
 
 msgctxt "#30036"
 msgid "Following"
-msgstr ""
+msgstr "Abonnements"
 
 msgctxt "#30037"
 msgid "Favourites"
-msgstr ""
+msgstr "Favoriten"
 
 msgctxt "#30038"
 msgid "Playlists"
-msgstr ""
+msgstr "Wiedergabelisten"
 
 msgctxt "#30039"
 msgid "3D"
-msgstr ""
+msgstr "3D"
 
 msgctxt "#30040"
 msgid "All"
-msgstr ""
+msgstr "Alle"
 
 msgctxt "#30041"
 msgid "Videos"
-msgstr ""
+msgstr "Videos"
 
 msgctxt "#30042"
 msgid "Groups"
-msgstr ""
+msgstr "Gruppen"
 
 msgctxt "#30043"
 msgid "Add to queue"
-msgstr "In Abspielliste einreihen"
+msgstr "In die Warteschlange einreihen"
 
 msgctxt "#30044"
 msgid "Download video"
-msgstr "Video runterladen"
+msgstr "Video herunterladen"
 
 msgctxt "#30101"
 msgid "Country"
@@ -202,11 +202,11 @@ msgstr "Land"
 
 msgctxt "#30102"
 msgid "Force View"
-msgstr "View erzwingen"
+msgstr "Ansicht erzwingen"
 
 msgctxt "#30103"
 msgid "ViewID"
-msgstr "View ID"
+msgstr "Ansichts-ID"
 
 msgctxt "#30104"
 msgid "Family Filter"
@@ -214,11 +214,11 @@ msgstr "Familienfilter"
 
 msgctxt "#30105"
 msgid "Maximum resolution"
-msgstr "Maximale Aufösung"
+msgstr "Maximale Auflösung"
 
 msgctxt "#30106"
 msgid "Dailymotion Username"
-msgstr ""
+msgstr "Dailymotion-Benutzername"
 
 msgctxt "#30107"
 msgid "Items per page"
@@ -226,7 +226,7 @@ msgstr "Einträge pro Seite"
 
 msgctxt "#30108"
 msgid "Download directory"
-msgstr "Downloadverzeichnis"
+msgstr "Downloadordner"
 
 msgctxt "#30109"
 msgid "File already exists"
@@ -234,15 +234,15 @@ msgstr "Datei existiert bereits"
 
 msgctxt "#30110"
 msgid "Choose download directory in Settings"
-msgstr "Downloadverzeichnis in dein Einstellungen wählen"
+msgstr "Downloadordner in den Einstellungen auswählen"
 
 msgctxt "#30111"
 msgid "General"
-msgstr "Allgemeiner"
+msgstr "Allgemein"
 
 msgctxt "#30112"
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Downloads"
 
 msgctxt "#30113"
 msgid "Miscellaneous"
@@ -250,7 +250,7 @@ msgstr "Sonstiges"
 
 msgctxt "#30114"
 msgid "Mature Content"
-msgstr "Reifer Inhalt"
+msgstr "Inhalte für Erwachsene"
 
 msgctxt "#30115"
 msgid "Search history"
@@ -263,3 +263,19 @@ msgstr "Suchverlauf löschen"
 msgctxt "#30117"
 msgid "New Search term"
 msgstr "Neuer Suchbegriff"
+
+msgctxt "#30118"
+msgid "User: {0}  |  {1} Views  |  {2}"
+msgstr "Benutzer: {0}  |  {1} Aufrufe  |  {2}"
+
+msgctxt "#30119"
+msgid "Views: {0}\nVideos: {1}"
+msgstr "Aufrufe: {0}\nVideos: {1}"
+
+msgctxt "#30120"
+msgid "Views: {0}"
+msgstr "Aufrufe: {0}"
+
+msgctxt "#30121"
+msgid "Clear all search terms?"
+msgstr "Alle Suchbegriffe löschen?"
