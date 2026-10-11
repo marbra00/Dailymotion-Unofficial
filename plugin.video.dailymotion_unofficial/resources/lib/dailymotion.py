@@ -90,7 +90,8 @@ def index():
     addDir(translation(30003), "{0}/videos?fields=id,thumbnail_large_url,title,views_last_hour&availability=1&live_onair=1&sort=visited-month&limit={1}&family_filter={2}&localization={3}&page=1".format(urlMain, itemsPerPage, familyFilter, language), 'listLive', "{0}live.png".format(_ipath))
     addDir(translation(30006), "", 'listChannels', "{0}channels.png".format(_ipath))
     addDir(translation(30007), "{0}/users?fields=username,avatar_large_url,videos_total,views_total&sort=popular&limit={1}&family_filter={2}&localization={3}&page=1".format(urlMain, itemsPerPage, familyFilter, language), 'listUsers', "{0}users.png".format(_ipath))
-    addDir(translation(30002), "{0}/videos?fields=description,duration,id,owner.username,taken_time,thumbnail_large_url,title,views_total&search=&sort=relevance&limit={1}&family_filter={2}&localization={3}&page=1".format(urlMain, itemsPerPage, familyFilter, language), 'search', "{0}search.png".format(_ipath))
+    # Run the search dialog as an action, outside Kodi's folder-loading guard.
+    addDir(translation(30002), "{0}/videos?fields=description,duration,id,owner.username,taken_time,thumbnail_large_url,title,views_total&search=&sort=relevance&limit={1}&family_filter={2}&localization={3}&page=1".format(urlMain, itemsPerPage, familyFilter, language), 'search', "{0}search.png".format(_ipath), is_folder=False)
     addDir("{0} {1}".format(translation(30002), translation(30003)), "", 'livesearch', "{0}search_live.png".format(_ipath))
     addDir("{0} {1}".format(translation(30002), translation(30007)), "", 'usersearch', "{0}search_users.png".format(_ipath))
     addDir(translation(30115), "", "History", "{0}search.png".format(_ipath))
@@ -98,8 +99,8 @@ def index():
         addDir(translation(30034), "", "personalMain", "{0}my_stuff.png".format(_ipath))
     else:
         addFavDir(translation(30024), "", "favouriteUsers", "{0}favourite_users.png".format(_ipath))
+    xbmcplugin.setContent(pluginhandle, "files")
     xbmcplugin.endOfDirectory(pluginhandle)
-    xbmcplugin.setContent(pluginhandle, "addons")
     if force_mode:
         xbmc.executebuiltin('Container.SetViewMode({0})'.format(menu_mode))
 
@@ -573,7 +574,7 @@ def addLiveLink(name, url, mode, iconimage, desc):
     return ok
 
 
-def addDir(name, url, mode, iconimage, desc=""):
+def addDir(name, url, mode, iconimage, desc="", is_folder=True):
     u = "{0}?url={1}&mode={2}".format(sys.argv[0], urllib_parse.quote_plus(url), mode)
     ok = True
     liz = make_listitem(name=name, labels={"Title": name, "Plot": desc})
@@ -581,7 +582,9 @@ def addDir(name, url, mode, iconimage, desc=""):
                 'icon': _icon,
                 'poster': iconimage,
                 'fanart': _fanart})
-    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=True)
+    if not is_folder:
+        liz.setProperty('IsPlayable', 'false')
+    ok = xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]), url=u, listitem=liz, isFolder=is_folder)
     return ok
 
 
@@ -637,14 +640,11 @@ def get_key(heading):
 
 def search(url):
     search_string = get_key(translation(30002))
-    xbmcplugin.endOfDirectory(pluginhandle, cacheToDisc=False)
     if search_string and len(search_string) > 2:
         url2 = url.replace("&search=", "&search={0}".format(urllib_parse.quote_plus(search_string)))
         addtoHistory({'name': search_string, 'url': urllib_parse.quote_plus(url2), 'mode': 'listVideos'})
         u = "{0}?url={1}&mode=listVideos".format(sys.argv[0], urllib_parse.quote_plus(url2))
         xbmc.executebuiltin("Container.Update({0})".format(u))
-    else:
-        xbmc.executebuiltin("Container.Update({0},replace)".format(sys.argv[0]))
 
 
 def searchLive():

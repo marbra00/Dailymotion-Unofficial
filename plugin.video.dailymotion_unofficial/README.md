@@ -1,7 +1,5 @@
 # Dailymotion – Unofficial
 
-**Version:** 1.0.1
-
 **Addon-ID:** `plugin.video.dailymotion_unofficial`
 
 ## Deutsch
@@ -10,7 +8,7 @@ Inoffizieller Fork des Dailymotion-Addons von gujal, der unabhängig weitergepfl
 
 ### Installation
 
-1. Lade die Installationsdatei `plugin.video.dailymotion_unofficial-1.0.1.zip` herunter, sobald sie unter [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases) veröffentlicht ist. Die GitHub-Funktion „Download ZIP“ liefert das gesamte Quellcode-Repository und nicht das installierbare Addon.
+1. Lade die Addon-Installationsdatei (ZIP) aus den [Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases) herunter.
 2. Öffne in Kodi **Add-ons → Paket-Symbol → Aus ZIP-Datei installieren** und wähle die Datei aus. Falls Kodi die Installation blockiert, kann sie unter **Einstellungen → System → Add-ons → Unbekannte Quellen** freigegeben werden.
 3. Starte **Dailymotion – Unofficial** unter den Video-Addons.
 
@@ -54,7 +52,7 @@ An unofficial fork of gujal's Dailymotion addon, maintained independently. This 
 
 ### Installation
 
-1. Download `plugin.video.dailymotion_unofficial-1.0.1.zip` once it is published on [GitHub Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases). GitHub's “Download ZIP” provides the complete source repository rather than an installable addon package.
+1. Download the addon installation file (ZIP) from [Releases](https://github.com/marbra00/Dailymotion-Unofficial/releases).
 2. In Kodi, open **Add-ons → package icon → Install from ZIP file** and select the file. If installation is blocked, it can be enabled under **Settings → System → Add-ons → Unknown sources**.
 3. Open **Dailymotion – Unofficial** from the video addons.
 

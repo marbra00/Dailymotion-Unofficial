@@ -15,6 +15,5 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+# Importing this module dispatches the requested route, including the main menu.
 from resources.lib import dailymotion
-
-dailymotion.index()

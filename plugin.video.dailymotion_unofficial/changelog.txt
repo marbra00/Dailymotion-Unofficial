@@ -1,3 +1,8 @@
+1.0.2 - 11 Oct 2026
+ - Fix video search navigation.
+ - Fix menu display for the search action.
+ - Update German translations.
+
 1.0.1 - 11 Oct 2026
  - Fix video playback on Fire OS.
 
